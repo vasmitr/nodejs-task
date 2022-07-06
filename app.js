@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import DB from './src/db/db';
 
-import getFees from './src/helpers/fee';
+import getFees from './src/helpers/api';
 import processFile from './src/helpers/files';
 import { mapTransactionFromData, mapUserFromData } from './src/helpers/mappings';
 import processTransaction from './src/helpers/transactions';
