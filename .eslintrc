@@ -1,4 +1,6 @@
 {
     "extends": ["airbnb"],
-    "import/no-extraneous-dependencies": "no"
+    "rules": {
+        "import/no-extraneous-dependencies": "off"
+    }
 }
