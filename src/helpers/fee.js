@@ -30,3 +30,33 @@ export function calculateCashOutJuridicalFee(rules, amount) {
   const res = minAmount > fee ? minAmount : fee;
   return roundMoney(res);
 }
+
+export default class Calculator {
+  constructor(rules, db) {
+    this.rules = rules;
+    this.db = db;
+    this.calculateFee = this.calculateFee.bind(this);
+  }
+
+  calculateFee(transaction) {
+    const {
+      amount, type, userId,
+    } = transaction;
+    const { userType, totalAmount } = this.db.getUser(userId);
+
+    if (type === 'cash_in') {
+      return calculateCashInFee(this.rules, amount);
+    }
+
+    if (type === 'cash_out') {
+      if (userType === 'natural') {
+        return calculateCashOutNaturalFee(this.rules, amount, totalAmount);
+      }
+      if (userType === 'juridical') {
+        return calculateCashOutJuridicalFee(this.rules, amount);
+      }
+    }
+
+    return 0;
+  }
+}
