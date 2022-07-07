@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "calculate": "node --experimental-specifier-resolution=node app.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "lint": "npx eslint --fix ."
   },
   "repository": {
     "type": "git",

@@ -5,3 +5,11 @@ This is a CMD program which accepts bunch of trunsactions and returns fee for ea
 ### Usage
 1. Create an `.env` file in the project root with `BASE_URL=<your fee API url>`
 2. Run `npm run calculate ./<path_to_your_file>`
+
+### Run tests
+
+`npm run test`
+
+### Run eslint
+
+`npm run lint`
