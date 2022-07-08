@@ -24,6 +24,8 @@ test('Fee rounds properly', () => {
   expect(roundMoney(0.020, 'EUR')).toBe(0.02);
   expect(roundMoney(0.0201, 'EUR')).toBe(0.03);
   expect(roundMoney(0.02000008, 'EUR')).toBe(0.03);
+  expect(roundMoney(0.0023, 'BHD')).toBe(0.003);
+  expect(roundMoney(0.023, 'JPY')).toBe(1);
 });
 
 test('Cash in fee calculated properly', () => {
