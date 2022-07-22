@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import _uniqBy from 'lodash/uniqBy'
 import DB from './src/db/db';
 
 import getFees from './src/helpers/api';
@@ -14,7 +15,7 @@ async function app() {
   if (!fileName || fileName.length === 0) throw new Error('Please provide path to your JSON file');
 
   const fileData = processFile(fileName);
-  const users = fileData.map(mapUserFromData);
+  const users = _uniqBy(fileData.map(mapUserFromData), 'userId');
   const transactions = fileData.map(mapTransactionFromData);
 
   const db = new DB(users, transactions);
