@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import _uniqBy from 'lodash/uniqBy'
+import _uniqBy from 'lodash/uniqBy';
 import DB from './src/db/db';
 
 import getFees from './src/helpers/api';

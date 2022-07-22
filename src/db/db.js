@@ -4,6 +4,12 @@ class DB {
     this.transactions = transactions;
   }
 
+  setUserTransactionLastDate(userId, date) {
+    const user = this.users.find((_user) => _user.userId === userId);
+    user.lastTransactionDate = date;
+    this.users = [...this.users.filter((_user) => _user.userId !== userId), { ...user }];
+  }
+
   addUserAmount(userId, amount) {
     const user = this.users.find((_user) => _user.userId === userId);
     user.totalAmount += amount;

@@ -2,7 +2,7 @@
 import { format } from 'date-fns';
 
 export const mapUserFromData = ({ user_id, user_type }) => ({
-  userId: user_id, userType: user_type, totalAmount: 0,
+  userId: user_id, userType: user_type, totalAmount: 0, lastTransactionDate: null,
 });
 
 export const mapTransactionFromData = ({

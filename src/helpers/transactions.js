@@ -1,17 +1,24 @@
-const AMOUNT_RENEWAL_DAY = 'Monday';
+import { isSameWeek, parseISO } from 'date-fns';
 
 export default function processTransaction(db, transaction, operation) {
-  if (transaction.type === 'cash_out') {
+  const user = db.getUser(transaction.userId);
+  const shouldCountWeekAmount = user.userType === 'natural' && transaction.type === 'cash_out';
+  const hasAnotherWeekStarted = !!user.lastTransactionDate && !isSameWeek(
+    parseISO(user.lastTransactionDate),
+    parseISO(transaction.date),
+    {
+      weekStartsOn: 1, // Week starts on Monday
+    },
+  );
+
+  if (shouldCountWeekAmount) {
+    if (hasAnotherWeekStarted) {
+      db.dropUserAmount(user.userId);
+    }
+
+    db.setUserTransactionLastDate(transaction.userId, transaction.date);
     db.addUserAmount(transaction.userId, transaction.amount);
   }
 
-  const user = db.getUser(transaction.userId);
-
-  if (transaction.weekday === AMOUNT_RENEWAL_DAY && user.userType === 'natural' && transaction.type === 'cash_out') {
-    const userTransactions = db.getUserTransactionsPerDay(transaction.userId, transaction.date);
-    if (transaction.date === userTransactions[0].date) {
-      db.dropUserAmount(user.userId);
-    }
-  }
   return operation(transaction);
 }
