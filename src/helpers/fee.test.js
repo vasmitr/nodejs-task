@@ -46,7 +46,7 @@ test('Cash out juridical calculated properly', () => {
 });
 
 test('Set of transactions processd correctly', () => {
-  const expected = [0.06, 0.90, 87.00, 3.00, 0.30, 0.30, 5.00, 0.00, 0.00];
+  const expected = [0.06, 0.90, 87.00, 3.00, 0.30, 0.30, 5.00, 0.00, 0.00, 0.00, 3.00, 3.00];
   expect(transactions
     .map((trn) => processTransaction(db, trn, calculator.calculateFee))).toStrictEqual(expected);
 });
